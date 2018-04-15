@@ -35,6 +35,18 @@ def load_students
   file.close
 end
 
+def try_load_students
+  filename = ARGV.first# first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
+  if File.exists?(filename) # if it exists
+    load_students(filename)
+     puts "Loaded #{@students.count} from #{filename}"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist."
+    exit # quit the program
+  end
+end
+
 def interactive_menu
   loop do
     print_menu
@@ -88,4 +100,5 @@ def print_footer
   puts "Overall, we have #{@students.count} great students"
 end
 
+try_load_students
 interactive_menu
